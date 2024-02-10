@@ -1,8 +1,11 @@
 import React from 'react'
 import './css/Navbar.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { signOut } from 'firebase/auth'
+import { auth } from './FirebaseConfig'
 
 const Navbar = () => {
+    const navigate = useNavigate()
     return (
         <nav class="navbar navbar-expand-lg navbar-div">
             <div class="container">
@@ -19,7 +22,7 @@ const Navbar = () => {
                                 <Link class="nav-link active navbar-element" aria-current="page" to='/login'>Login</Link>
                             </li>
                             <li class="nav-item px-1">
-                                <a class="nav-link navbar-element" href="#">Logout</a>
+                                <Link class="nav-link navbar-element" onClick={() => { signOut(auth).then(() => { navigate('/') }) }}>Logout</Link>
                             </li>
                         </ul>
                     </div>
